@@ -17,6 +17,9 @@ function writeContact(contacts) {
 async function getContactById(contactId) {
   const contacts = await listContacts();
   const contact = contacts.find((contact) => contact.id === contactId);
+  if (!contact) {
+    return null;
+  }
   return contact;
   // ...твій код. Повертає об'єкт контакту з таким id. Повертає null, якщо контакт з таким id не знайдений.
 }
@@ -25,7 +28,7 @@ async function removeContact(contactId) {
   const contacts = await listContacts();
   const index = contacts.findIndex((contact) => contact.id === contactId);
   if (index === -1) {
-    return undefined;
+    return null;
   }
   const deleteContact = contacts[index];
   contacts.splice(index, 1);
